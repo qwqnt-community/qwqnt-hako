@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/qwqnt-community/types/main/plugin.schema.json",
+  "name": "qwqnt-template-vite-pnpm",
+  "version": "1.0.0",
+  "description": "A plugin template for QwQNT, powered by Vite & Typescript",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "oxlint --fix --tsconfig ./tsconfig.json --type-aware src/**/*.js,src/**/*.ts",
+    "build": "vite build --mode main && vite build --mode preload && vite build --mode renderer"
+  },
+  "author": "風間青祢",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@qwqnt/types": "github:qwqnt-community/types",
+    "@types/node": "^25.3.0",
+    "electron": "^40.6.0",
+    "oxlint": "^1.49.0",
+    "oxlint-tsgolint": "^0.14.2",
+    "unplugin-oxlint": "^0.7.5",
+    "unplugin-zip-pack": "^1.0.3",
+    "vite": "^7.3.1",
+    "vite-plugin-cp": "^6.0.3"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "qwqnt": {
+    "name": "QwQNT 插件模板",
+    "inject": {
+      "main": "./main/index.js",
+      "preload": "./preload/index.cjs",
+      "renderer": "./renderer/index.js"
+    }
+  }
+}
