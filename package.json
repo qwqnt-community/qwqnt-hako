@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/qwqnt-community/types/main/plugin.schema.json",
-  "name": "qwqnt-template-vite-pnpm",
+  "name": "qwqnt-hako",
   "version": "1.0.0",
-  "description": "A plugin template for QwQNT, powered by Vite & Typescript",
-  "type": "module",
+  "description": "A plugin that provide basic features for QwQNT.",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "oxlint --fix --tsconfig ./tsconfig.json --type-aware src/**/*.js,src/**/*.ts",
@@ -25,10 +25,10 @@
   },
   "packageManager": "pnpm@10.30.1",
   "qwqnt": {
-    "name": "QwQNT 插件模板",
+    "name": "Hako",
     "inject": {
       "main": "./main/index.js",
-      "preload": "./preload/index.cjs",
+      "preload": "./preload/index.js",
       "renderer": "./renderer/index.js"
     }
   }

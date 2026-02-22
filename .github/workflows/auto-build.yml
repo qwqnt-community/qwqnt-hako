@@ -31,5 +31,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: qwqnt-template-vite-pnpm.zip
+          files: qwqnt-hako.zip
           body_path: ./changeLog.md

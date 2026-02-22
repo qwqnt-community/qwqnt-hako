@@ -1,3 +1,1 @@
-alert('Renderer');
-
-QwQNTTemplate.greeting();
+import '../monorepos/pluginSettings/renderer';

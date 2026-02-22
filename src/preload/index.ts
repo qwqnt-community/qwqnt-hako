@@ -1,7 +1,2 @@
-import { contextBridge, ipcRenderer } from 'electron';
-
-contextBridge.exposeInMainWorld('QwQNTTemplate', {
-  greeting: () => {
-    ipcRenderer.send('QwQNTTemplate.greeting');
-  }
-});
+import '../monorepos/rendererEvents/preload';
+import '../monorepos/pluginSettings/preload';

@@ -20,35 +20,61 @@ const BaseConfig = defineConfig({
   },
 });
 
-const configBuilder = (type: 'main' | 'preload') => defineConfig({
-  ...BaseConfig,
-
-  plugins: [
-    viteOxlint({
-      includes: ['src/**/*.js', 'src/**/*.ts'],
-      fix: true,
-    }),
-  ],
-  build: {
-    minify: true,
-    outDir: resolve(OUTPUT_DIR, `./${type}`),
-    lib: {
-      entry: resolve(SRC_DIR, `./${type}/index.ts`),
-      formats: [ type === 'preload' ? 'cjs' : 'es' ],
-      fileName: () => 'index.js',
-    },
-    rollupOptions: {
-      external,
-    },
-  },
-  esbuild: {
-    platform: type === 'main' ? 'node' : 'browser',
-  },
-});
-
 const configs = {
-  main: configBuilder('main'),
-  preload: configBuilder('preload'),
+  main: defineConfig({
+    ...BaseConfig,
+
+    plugins: [
+      viteOxlint({
+        includes: ['src/**/*.js', 'src/**/*.ts'],
+        fix: true,
+      }),
+    ],
+    ssr: {
+      noExternal: true,
+    },
+    build: {
+      minify: true,
+      ssr: true,
+      outDir: resolve(OUTPUT_DIR, './main'),
+      lib: {
+        entry: resolve(SRC_DIR, './main/index.ts'),
+        formats: [ 'cjs' ],
+
+        fileName: () => 'index.js',
+      },
+      rollupOptions: {
+        external,
+      },
+      target: 'node23',
+    },
+    esbuild: {
+      platform: 'node',
+    },
+  }),
+  preload: defineConfig({
+    ...BaseConfig,
+
+    plugins: [
+      viteOxlint({
+        includes: ['src/**/*.js', 'src/**/*.ts'],
+        fix: true,
+      }),
+    ],
+    build: {
+      minify: true,
+      outDir: resolve(OUTPUT_DIR, './preload'),
+      lib: {
+        entry: resolve(SRC_DIR, './preload/index.ts'),
+        formats: [ 'cjs' ],
+
+        fileName: () => 'index.js',
+      },
+      rollupOptions: {
+        external,
+      },
+    },
+  }),
   renderer: defineConfig({
     ...BaseConfig,
 
@@ -70,7 +96,7 @@ const configs = {
       outDir: resolve(OUTPUT_DIR, './renderer'),
       lib: {
         entry: resolve(SRC_DIR, './renderer/index.ts'),
-        formats: [ 'es' ],
+        formats: [ 'cjs' ],
         fileName: () => 'index.js',
       },
       rollupOptions: {
