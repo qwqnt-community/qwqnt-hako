@@ -1,9 +1,0 @@
-{
-  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
-  "include": ["**/main/**/*", "../global.d.ts"],
-  "compilerOptions": {
-    "composite": true,
-    "types": ["electron-vite/node", "@qwqnt/types/main"],
-    "moduleResolution": "bundler"
-  }
-}
