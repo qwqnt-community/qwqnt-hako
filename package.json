@@ -30,6 +30,9 @@
       "main": "./main/index.js",
       "preload": "./preload/index.js",
       "renderer": "./renderer/index.js"
+    },
+    "dependencies": {
+      "qwqnt-ipc-interceptor": "^1.2.0"
     }
   }
 }
