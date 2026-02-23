@@ -1,3 +1,3 @@
-# 1.0.0
+# 1.0.1
 
-1. 迁移 qwqnt-renderer-events 和 qwqnt-plugin-settings 插件功能
+1. 修复默认图标不存在的问题
