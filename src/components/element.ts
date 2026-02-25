@@ -1,13 +1,17 @@
-export class BaseElement extends HTMLElement {
-  static observedAttributes = [
-    'data-title',
-    'data-value',
-    'data-type',
-    'data-direction',
-    'is-collapsible',
-    'is-selected',
-    'is-active',
-    'is-disabled'
+import { css, LitElement, type TemplateResult, adoptStyles } from 'lit';
+
+export class BaseElement extends LitElement {
+  static styles = [
+    css`
+      :host([is-disabled]) {
+        opacity: .3;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+      :host(.hidden), .hidden {
+        display: none !important;
+      }
+    `,
   ];
 
   attributeChangedCallback(){
@@ -20,36 +24,16 @@ export class BaseElement extends HTMLElement {
 
   disconnectedCallback(){};
 
-  getTemplate(): string{
-    throw new Error('getTemplate must be implemented by subclass.');
-  };
-
-  getStyles(): string{
-    throw new Error('getStyles must be implemented by subclass.');
-  };
-
   update(){};
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot!.innerHTML = this.getTemplate();
-    const sheet = new CSSStyleSheet();
-    sheet.replaceSync(`
-      :host([is-disabled]) {
-        opacity: .3;
-        cursor: not-allowed;
-        pointer-events: none;
-      }
-      :host(.hidden), .hidden {
-        display: none !important;
-      }
-      ${this.getStyles()}
-    `);
-    this.shadowRoot!.adoptedStyleSheets = [ sheet ];
+    adoptStyles(this.shadowRoot!, (this.constructor as typeof BaseElement).styles);
+    this.shadowRoot!.innerHTML = (this.render as () => TemplateResult<1>)().strings[0];
   };
 
-  setTitle(title){
+  setTitle(title: string){
     this.setAttribute('data-title', title);
   };
 
@@ -57,7 +41,7 @@ export class BaseElement extends HTMLElement {
     return this.getAttribute('data-title');
   };
 
-  setValue(value){
+  setValue(value: string){
     this.setAttribute('data-value', value);
   };
 
@@ -65,7 +49,7 @@ export class BaseElement extends HTMLElement {
     return this.getAttribute('data-value');
   };
 
-  setType(type){
+  setType(type: 'primary' | 'secondary'){
     if(!['primary', 'secondary'].includes(type)){
       throw new Error('Type must be "primary" or "secondary"');
     }
@@ -76,7 +60,7 @@ export class BaseElement extends HTMLElement {
     return this.getAttribute('data-type');
   };
 
-  setDirection(direction){
+  setDirection(direction: 'column' | 'row'){
     if(!['column', 'row'].includes(direction)){
       throw new Error('Direction must be "column" or "row"');
     }
@@ -87,7 +71,7 @@ export class BaseElement extends HTMLElement {
     return this.getAttribute('data-direction');
   };
 
-  setCollapsible(collapsible){
+  setCollapsible(collapsible: boolean){
     this.toggleAttribute('is-collapsible', collapsible);
   };
 
@@ -95,7 +79,7 @@ export class BaseElement extends HTMLElement {
     return this.hasAttribute('is-collapsible');
   };
 
-  setSelected(selected){
+  setSelected(selected: boolean){
     this.toggleAttribute('is-selected', selected);
   };
 
@@ -103,7 +87,7 @@ export class BaseElement extends HTMLElement {
     return this.hasAttribute('is-selected');
   };
 
-  setActive(active){
+  setActive(active: boolean){
     this.toggleAttribute('is-active', active);
   };
 
@@ -111,7 +95,7 @@ export class BaseElement extends HTMLElement {
     return this.hasAttribute('is-active');
   };
 
-  setDisabled(disabled){
+  setDisabled(disabled: boolean){
     this.toggleAttribute('is-disabled', disabled);
   };
 

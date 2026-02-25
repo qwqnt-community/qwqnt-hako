@@ -1,4 +1,5 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Modal extends BaseElement {
   #title = this.shadowRoot!.querySelector('.title')!;
@@ -6,41 +7,9 @@ export class Modal extends BaseElement {
   #modal = this.shadowRoot!.querySelector('.modal')!;
   #toggleActiveBound = this.#toggleActive.bind(this);
 
-  #toggleActive(){
-    this.setActive(!this.getActive());
-  };
-
-  connectedCallback(){
-    super.connectedCallback();
-    this.#close.addEventListener("click", this.#toggleActiveBound);
-    this.#modal.addEventListener("click", this.#toggleActiveBound);
-  };
-
-  disconnectedCallback(){
-    super.disconnectedCallback();
-    this.#close.removeEventListener("click", this.#toggleActiveBound);
-    this.#modal.removeEventListener("click", this.#toggleActiveBound);
-  };
-
-  getTemplate(){
-    return /*html*/ `
-      <div class='modal'></div>
-      <div class='main'>
-        <div class='header'>
-          <div class='title'></div>
-          <svg class='close' viewBox='0 0 24 24'>
-            <use xlink:href='/_upper_/resource/icons/close_24.svg#close_24'></use>
-          </svg>
-        </div>
-        <div class='body'>
-          <slot></slot>
-        </div>
-      </div>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host {
         display: none;
       }
@@ -129,6 +98,54 @@ export class Modal extends BaseElement {
           transform: translateY(0);
         }
       }
+    `,
+  ];
+
+  static properties = {
+    dataTitle: {
+      type: 'String',
+      attribute: 'data-title',
+    },
+    isActive: {
+      type: 'Boolean',
+      attribute: 'is-active',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  #toggleActive(){
+    this.setActive(!this.getActive());
+  };
+
+  connectedCallback(){
+    super.connectedCallback();
+    this.#close.addEventListener("click", this.#toggleActiveBound);
+    this.#modal.addEventListener("click", this.#toggleActiveBound);
+  };
+
+  disconnectedCallback(){
+    super.disconnectedCallback();
+    this.#close.removeEventListener("click", this.#toggleActiveBound);
+    this.#modal.removeEventListener("click", this.#toggleActiveBound);
+  };
+
+  render(){
+    return html`
+      <div class='modal'></div>
+      <div class='main'>
+        <div class='header'>
+          <div class='title'></div>
+          <svg class='close' viewBox='0 0 24 24'>
+            <use xlink:href='/_upper_/resource/icons/close_24.svg#close_24'></use>
+          </svg>
+        </div>
+        <div class='body'>
+          <slot></slot>
+        </div>
+      </div>
     `;
   };
 

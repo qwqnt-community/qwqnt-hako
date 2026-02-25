@@ -10,6 +10,7 @@
   ],
   "compilerOptions": {
     "composite": true,
+    "useDefineForClassFields": true,
     "types": ["@qwqnt/types/preload", "@qwqnt/types/renderer"]
   }
 }

@@ -1,14 +1,10 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Text extends BaseElement {
-  getTemplate(){
-    return /*html*/ `
-      <slot></slot>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host {
         display: -webkit-box;
         word-break: break-all;
@@ -24,6 +20,23 @@ export class Text extends BaseElement {
         line-height: min(var(--line_height_2), 22px);
         margin-top: 4px;
       }
+    `,
+  ];
+
+  static properties = {
+    dataType: {
+      type: 'String',
+      attribute: 'data-type',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  render(){
+    return html`
+      <slot></slot>
     `;
   };
 };

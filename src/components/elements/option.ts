@@ -1,21 +1,10 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Option extends BaseElement {
-  getTemplate(){
-    return /*html*/ `
-      <li>
-        <span>
-          <slot></slot>
-        </span>
-        <svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path d='M2 7L6.00001 11L14 3' stroke='currentColor' stroke-linejoin='round'></path>
-        </svg>
-      </li>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host {
         display: block;
       }
@@ -61,6 +50,34 @@ export class Option extends BaseElement {
         color: var(--icon_primary);
         margin: 7px -4px 0px 0px;
       }
+    `,
+  ];
+
+  static properties = {
+    dataValue: {
+      type: 'String',
+      attribute: 'data-value',
+    },
+    isSelected: {
+      type: 'Boolean',
+      attribute: 'is-selected',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  render(){
+    return html`
+      <li>
+        <span>
+          <slot></slot>
+        </span>
+        <svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M2 7L6.00001 11L14 3' stroke='currentColor' stroke-linejoin='round'></path>
+        </svg>
+      </li>
     `;
   };
 };
