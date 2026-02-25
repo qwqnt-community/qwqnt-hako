@@ -1,16 +1,10 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Switch extends BaseElement {
-  getTemplate(){
-    return /*html*/ `
-      <span>
-        <slot></slot>
-      </span>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host {
         background-color: var(--fill_standard_primary);
         border-radius: 14px;
@@ -36,6 +30,25 @@ export class Switch extends BaseElement {
         width: 10px;
         background: var(--icon_white);
       }
+    `,
+  ];
+
+  static properties = {
+    isActive: {
+      type: 'Boolean',
+      attribute: 'is-active',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  render(){
+    return html`
+      <span>
+        <slot></slot>
+      </span>
     `;
   };
 };

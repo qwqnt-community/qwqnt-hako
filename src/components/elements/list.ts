@@ -1,32 +1,16 @@
 import { BaseElement } from '../element';
 import { Item } from './item';
 import { Divider } from './divider';
+import { css, html } from 'lit';
 
 export class List extends BaseElement {
   #head: Item = this.shadowRoot!.querySelector('setting-item')!;
   #title = this.shadowRoot!.querySelector('h2')!;
   #slot = this.shadowRoot!.querySelector('slot')!;
 
-  constructor(){
-    super();
-    this.#setupEventListeners();
-    this.#setupMutationObserver();
-  };
-
-  getTemplate(){
-    return /*html*/ `
-      <setting-item data-direction='row' class='hidden'>
-        <h2></h2>
-        <svg viewBox='0 0 24 24'>
-          <use xlink:href="/_upper_/resource/icons/arrow_down_24.svg#arrow_down_24"></use>
-        </svg>
-      </setting-item>
-      <slot></slot>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host([data-direction='column']) {
         display: block;
         padding: 0px 16px;
@@ -68,6 +52,47 @@ export class List extends BaseElement {
         margin: 0px;
         padding: 0px;
       }
+    `,
+  ];
+
+  static properties = {
+    dataDirection: {
+      type: 'String',
+      attribute: 'data-direction',
+    },
+    dataTitle: {
+      type: 'String',
+      attribute: 'data-title',
+    },
+    isCollapsible: {
+      type: 'Boolean',
+      attribute: 'is-collapsible',
+    },
+    isActive: {
+      type: 'Boolean',
+      attribute: 'is-active',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  constructor(){
+    super();
+    this.#setupEventListeners();
+    this.#setupMutationObserver();
+  };
+
+  render(){
+    return html`
+      <setting-item data-direction='row' class='hidden'>
+        <h2></h2>
+        <svg viewBox='0 0 24 24'>
+          <use xlink:href="/_upper_/resource/icons/arrow_down_24.svg#arrow_down_24"></use>
+        </svg>
+      </setting-item>
+      <slot></slot>
     `;
   };
 

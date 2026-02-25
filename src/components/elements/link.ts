@@ -1,6 +1,28 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Link extends BaseElement {
+  static styles = [
+    ...super.styles,
+    css`
+      :host {
+        color: var(--text_link);
+        cursor: pointer;
+      }
+    `,
+  ];
+
+  static properties = {
+    dataValue: {
+      type: 'String',
+      attribute: 'data-value',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
   #openExternalBound = this.#openExternal.bind(this);
 
   connectedCallback(){
@@ -28,18 +50,9 @@ export class Link extends BaseElement {
     this.textContent ||= this.getValue();
   };
 
-  getTemplate(){
-    return /*html*/ `
+  render(){
+    return html`
       <slot></slot>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
-      :host {
-        color: var(--text_link);
-        cursor: pointer;
-      }
     `;
   };
 };

@@ -1,17 +1,11 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 
 export class Button extends BaseElement {
-  getTemplate(){
-    return /*html*/ `
-      <button>
-        <slot></slot>
-      </button>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host {
         position: relative;
         vertical-align: text-bottom;
@@ -55,6 +49,25 @@ export class Button extends BaseElement {
       :host([data-type="secondary"]) button:active {
         background-color: var(--overlay_pressed);
       }
+    `,
+  ];
+
+  static properties = {
+    dataType: {
+      type: 'String',
+      attribute: 'data-type',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  render(){
+    return html`
+      <button>
+        <slot></slot>
+      </button>
     `;
   };
 };

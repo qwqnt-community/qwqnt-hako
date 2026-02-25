@@ -1,17 +1,12 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Section extends BaseElement {
   #title = this.shadowRoot!.querySelector('h1')!;
 
-  getTemplate(){
-    return /*html*/ `
-      <h1></h1>
-      <slot></slot>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       h1 {
         color: var(--text_primary);
         font-weight: var(--font-bold);
@@ -20,6 +15,24 @@ export class Section extends BaseElement {
         padding: 0px 16px;
         margin: 0px 0px 8px;
       }
+    `,
+  ];
+
+  static properties = {
+    dataTitle: {
+      type: 'String',
+      attribute: 'data-title',
+    },
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  render(){
+    return html`
+      <h1></h1>
+      <slot></slot>
     `;
   };
 

@@ -1,14 +1,10 @@
 import { BaseElement } from '../element';
+import { css, html } from 'lit';
 
 export class Panel extends BaseElement {
-  getTemplate(){
-    return /*html*/ `
-      <slot></slot>
-    `;
-  };
-
-  getStyles(){
-    return /*css*/ `
+  static styles = [
+    ...super.styles,
+    css`
       :host {
         display: block;
         background-color: var(--fill_light_primary, var(--fg_white));
@@ -17,6 +13,19 @@ export class Panel extends BaseElement {
         line-height: min(var(--line_height_3), 24px);
         margin-bottom: 20px;
       }
+    `,
+  ];
+
+  static properties = {
+    isDisabled: {
+      type: 'Boolean',
+      attribute: 'is-disabled',
+    },
+  };
+
+  render(){
+    return html`
+      <slot></slot>
     `;
   };
 };
