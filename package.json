@@ -16,6 +16,7 @@
     "@qwqnt/types": "github:qwqnt-community/types",
     "@types/node": "^25.3.0",
     "electron": "^40.6.1",
+    "lit": "^3.3.2",
     "oxlint": "^1.50.0",
     "oxlint-tsgolint": "^0.15.0",
     "unplugin-oxlint": "^0.7.5",
