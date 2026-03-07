@@ -61,12 +61,6 @@ RendererEvents.onLogin((uid: string) => {
 
 ```typescript
 // renderer
-// 方法一：
-RendererEvents.onSettingsWindowCreated(async () => {
-  const view = await PluginSettings.renderer.registerPluginSettings(packageJson);
-});
-
-// 方法二：
 PluginSettings.renderer.registerPluginSettings(packageJson).then(view => {
   // your codes
 });
