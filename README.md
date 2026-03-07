@@ -86,46 +86,12 @@ PluginSettings.renderer.registerPluginSettings(packageJson).then(view => {
 
 ## Typescript 支持
 
-如果你使用 Typescript，你可能需要在你的 global.d.ts 文件中添加：
+如果你使用 Typescript，你可能需要安装 hako 对应的类型库：
 
-```Typescript
-// global.d.ts
-declare namespace RendererEvents {
-  const onLogin: (callback: (uid?: string) => void) => void;
-  const onSettingsWindowCreated: (callback: () => void) => void;
-  const onSettingsWindowCreatedOnce: (callback: () => void) => void;
-  const onMessageWindowCreated: (callback: () => void) => void;
-  const onMessageWindowCreatedOnce: (callback: () => void) => void;
-}
-
-interface IQwQNTPlugin {
-  name: string;
-  qwqnt?: {
-    name?: string;
-    icon?: string;
-    inject?: {
-      main?: string;
-      renderer?: string;
-      preload?: string;
-    };
-  };
-};
-
-declare namespace PluginSettings {
-  interface ICommon {
-    readConfig: <T>(id: string, defaultConfig?: T) => T;
-    writeConfig: <T>(id: string, newConfig: T) => boolean;
-    openPath: (path: string) => void;
-    openExternal: (url: string) => void;
-  }
-  interface IRenderer extends ICommon {
-    registerPluginSettings: (packageJson: IQwQNTPlugin) => Promise<HTMLDivElement>;
-  }
-
-  const main: ICommon;
-  const preload: ICommon;
-  const renderer: IRenderer;
-}
+```sh
+npm install github:qwqnt-community/plugin-types#hako --save-dev # npm
+# or
+pnpm add github:qwqnt-community/plugin-types#hako -D # pnpm
 ```
 
 ## License
