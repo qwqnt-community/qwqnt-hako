@@ -34,7 +34,7 @@ export class SettingInterface {
           this.#qwqnt_setting_view.style.display = 'none';
         }
         // 重新设定激活状态
-        this.#setting_title.childNodes[1].textContent = nav_item.querySelector('.name')!.textContent;
+        this.#setting_title.childNodes[2].textContent = nav_item.querySelector('.name')!.textContent;
         document.querySelectorAll('.setting-tab .nav-item').forEach(element => {
           element.classList.remove('nav-item-active');
         });
