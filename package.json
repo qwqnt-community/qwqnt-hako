@@ -14,17 +14,17 @@
   "devDependencies": {
     "@electron-toolkit/tsconfig": "^2.0.0",
     "@qwqnt/types": "github:qwqnt-community/types",
-    "@types/node": "^25.3.0",
-    "electron": "^40.6.1",
-    "lit": "^3.3.2",
-    "oxlint": "^1.50.0",
-    "oxlint-tsgolint": "^0.15.0",
-    "unplugin-oxlint": "^0.7.5",
-    "unplugin-zip-pack": "^1.0.3",
-    "vite": "^7.3.1",
+    "@types/node": "^26.1.1",
+    "electron": "^43.1.1",
+    "lit": "^3.3.3",
+    "oxlint": "^1.74.0",
+    "oxlint-tsgolint": "^0.25.0",
+    "unplugin-oxlint": "^0.8.2",
+    "unplugin-zip-pack": "^1.1.0",
+    "vite": "^8.1.5",
     "vite-plugin-cp": "^6.0.3"
   },
-  "packageManager": "pnpm@10.30.2",
+  "packageManager": "pnpm@11.15.1",
   "qwqnt": {
     "name": "Hako",
     "inject": {
