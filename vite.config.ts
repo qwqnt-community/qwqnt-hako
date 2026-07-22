@@ -26,16 +26,13 @@ const configs = {
 
     plugins: [
       viteOxlint({
-        includes: ['src/**/*.js', 'src/**/*.ts'],
+        includes: 'src',
+        glob: true,
         fix: true,
       }),
     ],
-    ssr: {
-      noExternal: true,
-    },
     build: {
       minify: true,
-      ssr: true,
       outDir: resolve(OUTPUT_DIR, './main'),
       lib: {
         entry: resolve(SRC_DIR, './main/index.ts'),
@@ -43,13 +40,13 @@ const configs = {
 
         fileName: () => 'index.js',
       },
-      rollupOptions: {
+      rolldownOptions: {
         external,
       },
       target: 'node23',
     },
-    esbuild: {
-      platform: 'node',
+    oxc: {
+      target: 'node23',
     },
   }),
   preload: defineConfig({
@@ -57,7 +54,8 @@ const configs = {
 
     plugins: [
       viteOxlint({
-        includes: ['src/**/*.js', 'src/**/*.ts'],
+        includes: 'src',
+        glob: true,
         fix: true,
       }),
     ],
@@ -70,7 +68,7 @@ const configs = {
 
         fileName: () => 'index.js',
       },
-      rollupOptions: {
+      rolldownOptions: {
         external,
       },
     },
@@ -80,7 +78,8 @@ const configs = {
 
     plugins: [
       viteOxlint({
-        includes: ['src/**/*.js', 'src/**/*.ts'],
+        includes: 'src',
+        glob: true,
         fix: true,
       }),
       viteCp({
@@ -99,11 +98,10 @@ const configs = {
       outDir: resolve(OUTPUT_DIR, './renderer'),
       lib: {
         entry: resolve(SRC_DIR, './renderer/index.ts'),
-        formats: [ 'cjs' ],
-        fileName: () => 'index.js',
+        formats: [ 'es' ],
+        fileName: () => 'index.mjs',
       },
-      rollupOptions: {
-        input: resolve(SRC_DIR, './renderer/index.ts'),
+      rolldownOptions: {
         external,
       },
     },

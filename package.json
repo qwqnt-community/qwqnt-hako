@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "oxlint --fix --tsconfig ./tsconfig.json --type-aware src/**/*.js,src/**/*.ts",
+    "lint": "oxlint --fix --tsconfig ./tsconfig.json --type-aware src",
     "build": "vite build --mode main && vite build --mode preload && vite build --mode renderer"
   },
   "author": "風間青祢",
@@ -30,7 +30,7 @@
     "inject": {
       "main": "./main/index.js",
       "preload": "./preload/index.js",
-      "renderer": "./renderer/index.js"
+      "renderer": "./renderer/index.mjs"
     },
     "dependencies": {
       "qwqnt-ipc-interceptor": "^1.2.0"

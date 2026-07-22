@@ -3,7 +3,7 @@
   "include": ["vite.config.*", "src/main/**/*", "src/types/**/*", "src/global.d.ts"],
   "compilerOptions": {
     "composite": true,
-    "types": ["electron-vite/node", "@qwqnt/types/main"],
+    "types": ["@qwqnt/types/main"],
     "moduleResolution": "bundler"
   }
 }
