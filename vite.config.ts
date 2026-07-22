@@ -98,8 +98,8 @@ const configs = {
       outDir: resolve(OUTPUT_DIR, './renderer'),
       lib: {
         entry: resolve(SRC_DIR, './renderer/index.ts'),
-        formats: [ 'es' ],
-        fileName: () => 'index.mjs',
+        formats: [ 'cjs' ],
+        fileName: () => 'index.js',
       },
       rolldownOptions: {
         external,
