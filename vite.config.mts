@@ -4,15 +4,15 @@ import { builtinModules } from 'node:module';
 import viteCp from 'vite-plugin-cp';
 import viteOxlint from 'unplugin-oxlint/vite';
 import viteZipPack from 'unplugin-zip-pack/vite';
-import Plugin from './package.json';
+import Plugin from './package.json' with { type: 'json' };
 
-const SRC_DIR = resolve(__dirname, './src');
-const OUTPUT_DIR = resolve(__dirname, './dist');
+const SRC_DIR = resolve(import.meta.dirname, './src');
+const OUTPUT_DIR = resolve(import.meta.dirname, './dist');
 
 const external = ['electron', ...builtinModules.flatMap(m => [m, `node:${m}`])];
 
 const BaseConfig = defineConfig({
-  root: __dirname,
+  root: import.meta.dirname,
   resolve: {
     alias: {
       '@': SRC_DIR,
@@ -90,7 +90,7 @@ const configs = {
       }),
       viteZipPack({
         in: OUTPUT_DIR,
-        out: resolve(__dirname, `./${Plugin.name}.zip`),
+        out: resolve(import.meta.dirname, `./${Plugin.name}.zip`),
       }),
     ],
     build: {
