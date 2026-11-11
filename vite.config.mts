@@ -86,6 +86,7 @@ const configs = {
         targets: [
           { src: './package.json', dest: 'dist' },
           { src: './src/settings/static/icon.svg', dest: 'dist/static' },
+          { src: './src/pages/settings.html', dest: 'dist/pages' },
         ],
       }),
       viteZipPack({

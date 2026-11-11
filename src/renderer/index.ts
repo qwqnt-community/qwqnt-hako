@@ -1,5 +1,6 @@
 import '../components/index';
 import settingsStyle from '../settings/static/style.css?raw';
+import packageJson from '../../package.json' with { type: 'json' };
 import { SettingInterface } from '../settings/index';
 import type { IQwQNTPlugin } from '../types/QwQNTPlugin';
 
@@ -25,4 +26,18 @@ Object.defineProperty(window, 'PluginSettings', {
     },
   },
   writable: true,
+});
+
+RendererEvents.onSettingsWindowCreated(async () => {
+  const view = await registerPluginSettings(packageJson);
+  const pluginPath = __self.meta.path;
+  const settingsPageStoragePath = qwqnt.framework.protocol.pathToStorageUrl(`${pluginPath}\\pages\\settings.html`);
+
+  view.innerHTML = await (await fetch(settingsPageStoragePath)).text();
+
+  const versions = await Hako.getVersions();
+
+  view.querySelector('.versions .electron .version')!.textContent = versions.electron;
+  view.querySelector('.versions .chromium .version')!.textContent = versions.chromium;
+  view.querySelector('.versions .nodejs .version')!.textContent = versions.nodejs;
 });

@@ -59,6 +59,14 @@ ipcMain.handle('Hako.parsePath', (_, ...pathParts: string[]) => {
   return normalize(join(...pathParts));
 });
 
+ipcMain.handle('Hako.getVersions', () => {
+  return {
+    electron: process.versions.electron,
+    chromium: process.versions.chrome,
+    nodejs: process.versions.node,
+  };
+});
+
 ipcMain.on('Hako.readConfig', <T>(event: IpcMainEvent, id: string, defaultConfig?: T) => {
   event.returnValue = readConfig(id, defaultConfig);
 });

@@ -30,6 +30,7 @@ declare namespace Hako {
   const openPath: (path: string) => void;
   const openExternal: (url: string) => void;
   const parsePath: (...pathParts: string[]) => Promise<string>;
+  const getVersions: () => Promise<{ electron: string, chromium: string, nodejs: string }>;
 }
 
 type Unsubscribe = () => void

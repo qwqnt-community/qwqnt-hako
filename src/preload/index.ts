@@ -42,6 +42,9 @@ contextBridge.exposeInMainWorld('Hako', {
   parsePath: (...pathParts: string[]): Promise<string> => {
     return ipcRenderer.invoke('Hako.parsePath', ...pathParts);
   },
+  getVersions: (): Promise<{ electron: string, chromium: string, nodejs: string }> => {
+    return ipcRenderer.invoke('Hako.getVersions');
+  },
 });
 
 Object.defineProperty(globalThis, 'PluginSettings', {
