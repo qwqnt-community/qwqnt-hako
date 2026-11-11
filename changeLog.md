@@ -1,3 +1,3 @@
-# 1.0.3
+# 1.0.4
 
-1. 修复设置页标题无法被正常覆盖的问题（Thanks @Sn0wo2）
+1. 支持查看当前 QQ 使用的 Electron、Chromium 和 Node.js 版本。（Thanks LiteLoaderQQNT）
